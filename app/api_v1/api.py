@@ -1,3 +1,7 @@
+'''
+API v1 base router definition
+'''
+
 from fastapi import APIRouter
 
 
