@@ -8,6 +8,7 @@ authors = ["Ricardo Dani <ricardodani@gmail.com>"]
 python = "^3.8"
 fastapi = {version = "^0.58.1", extras = ["all"]}
 tortoise-orm = "^0.16.13"
+passlib = "^1.7.2"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.782"

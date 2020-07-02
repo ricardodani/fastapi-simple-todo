@@ -10,6 +10,7 @@ version = "0.6.0.dev0"
 reference = "72f88e50e48802fec8f988be5cc6c2d80c09a8de"
 type = "git"
 url = "https://github.com/Tinche/aiofiles/"
+
 [[package]]
 category = "main"
 description = "asyncio bridge to the standard sqlite3 module"
@@ -424,6 +425,20 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
+category = "main"
+description = "comprehensive password hashing framework supporting over 30 schemes"
+name = "passlib"
+optional = false
+python-versions = "*"
+version = "1.7.2"
+
+[package.extras]
+argon2 = ["argon2-cffi (>=18.2.0)"]
+bcrypt = ["bcrypt (>=3.1.0)"]
+build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.0)"]
+totp = ["cryptography"]
+
+[[package]]
 category = "dev"
 description = "plugin and hook calling mechanisms for python"
 name = "pluggy"
@@ -727,7 +742,7 @@ python-versions = "*"
 version = "1.12.1"
 
 [metadata]
-content-hash = "ae803df6acf9890a2256cb1de91b6edad89b7c78bef95f63bd0126b70d15beeb"
+content-hash = "eccc4a486a704bbbdd8b891b05864017043b9795b694d6cb8cff884cc2275dbf"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -953,6 +968,10 @@ orjson = [
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
     {file = "packaging-20.4.tar.gz", hash = "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"},
+]
+passlib = [
+    {file = "passlib-1.7.2-py2.py3-none-any.whl", hash = "sha256:68c35c98a7968850e17f1b6892720764cc7eed0ef2b7cb3116a89a28e43fe177"},
+    {file = "passlib-1.7.2.tar.gz", hash = "sha256:8d666cef936198bc2ab47ee9b0410c94adf2ba798e5a84bf220be079ae7ab6a8"},
 ]
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
