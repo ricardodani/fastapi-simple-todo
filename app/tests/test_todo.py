@@ -145,7 +145,7 @@ def test_edit_item_list(
     Testing editing a item of a list
     '''
 
-    # invalid list
+    # invalid item
     url = get_url("/list/0/0")
     item_a = ItemInput(todo_item_name="Item A")
     response = client.put(url, json=item_a.dict())
@@ -166,3 +166,40 @@ def test_edit_item_list(
     url = get_url(f"/list/{created_list.list_id}/{created_item.todo_item_id}")
     response = client.put(url, json=item_a.dict())
     assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+def test_delete_item_list(
+    client: TestClient, event_loop: asyncio.AbstractEventLoop  # noqa: F811
+):
+    '''
+    Testing deleting a item of a list
+    '''
+
+    # invalid item
+    url = get_url("/list/0/0")
+    item_a = ItemInput(todo_item_name="Item A")
+    response = client.delete(url, json=item_a.dict())
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    # list with item
+    async def create_list_with_item():
+        list_input = ListInput(list_name="List A")
+        item_b = ItemInput(todo_item_name="Item B")
+        created_list = await ListRepository.create(list_input)
+        created_item = await ItemRepository.add_item(
+            created_list.list_id, item_b
+        )
+        return created_list, created_item
+    created_list, created_item = event_loop.run_until_complete(
+        create_list_with_item()
+    )
+    url = get_url(f"/list/{created_list.list_id}/{created_item.todo_item_id}")
+    response = client.delete(url, json=item_a.dict())
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+
+    async def check_item_exists():
+        return await ItemRepository.check_item_exists(
+            created_list.list_id,
+            created_item.todo_item_id
+        )
+    assert not event_loop.run_until_complete(check_item_exists())

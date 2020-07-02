@@ -53,3 +53,12 @@ class ListUseCase:
         if not await ItemRepository.check_item_exists(list_id, item_id):
             raise UseCaseValidationError('List Item does not exists')
         return await ItemRepository.edit_item(list_id, item_id, item)
+
+    @classmethod
+    async def delete_item(cls, list_id: int, item_id: int):
+        '''
+        Deletes a specific item of a list given its list and item ids if exists
+        '''
+        if not await ItemRepository.check_item_exists(list_id, item_id):
+            raise UseCaseValidationError('List Item does not exists')
+        await ItemRepository.delete_item(list_id, item_id)

@@ -62,3 +62,7 @@ class ItemRepository:
     @classmethod
     async def edit_item(cls, list_id: int, item_id: int, item: ItemInput):
         await Item.filter(id=item_id, list_id=list_id).update(**item.to_orm())
+
+    @classmethod
+    async def delete_item(cls, list_id: int, item_id: int):
+        await Item.filter(id=item_id, list_id=list_id).delete()
