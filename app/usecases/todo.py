@@ -1,4 +1,7 @@
 from typing import List as ListType
+
+from tortoise.transactions import in_transaction  # type: ignore
+
 from app.schemas.todo import ListInput, ListSchema, ItemSchema, ItemInput
 from app.repositories.todo import ListRepository, ItemRepository
 from app.usecases.exceptions import UseCaseValidationError
@@ -29,8 +32,9 @@ class ListUseCase:
         '''
         if not await ListRepository.check_list_exists(list_id):
             raise UseCaseValidationError('List does not exists')
-        await ItemRepository.delete_items(list_id)
-        await ListRepository.delete_list(list_id)
+        async with in_transaction():  # TODO: should be in repository?!
+            await ItemRepository.delete_items(list_id)
+            await ListRepository.delete_list(list_id)
 
     @classmethod
     async def add_item(cls, list_id: int, item: ItemInput) -> ItemSchema:
@@ -40,3 +44,12 @@ class ListUseCase:
         if not await ListRepository.check_list_exists(list_id):
             raise UseCaseValidationError('List does not exists')
         return await ItemRepository.add_item(list_id, item)
+
+    @classmethod
+    async def edit_item(cls, list_id: int, item_id: int, item: ItemInput):
+        '''
+        Edit a specific item of a list given its list and item ids if it exists
+        '''
+        if not await ItemRepository.check_item_exists(list_id, item_id):
+            raise UseCaseValidationError('List Item does not exists')
+        return await ItemRepository.edit_item(list_id, item_id, item)

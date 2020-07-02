@@ -66,13 +66,17 @@ async def add_item(list_id: int, item: ItemInput):
 @router.put(
     "/list/{list_id}/{item_id}", status_code=status.HTTP_204_NO_CONTENT
 )
-def update_item(list_id: int, item_id: int, item: ItemInput):
+async def update_item(list_id: int, item_id: int, item: ItemInput):
     '''
     Updates a item `item_id` of a given list `id` endpoint
     '''
-    del list_id
-    del item_id
-    del item
+    try:
+        return await ListUseCase.edit_item(list_id, item_id, item)
+    except UseCaseValidationError as error:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(error)
+        )
 
 
 @router.delete(

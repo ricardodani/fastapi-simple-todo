@@ -23,7 +23,7 @@ class ListRepository:
         return await List.filter(id=list_id).exists()
 
     @classmethod
-    async def delete_list(cls, list_id: int) -> None:
+    async def delete_list(cls, list_id: int):
         return await List.filter(id=list_id).delete()
 
 
@@ -49,12 +49,16 @@ class ItemRepository:
         return ItemSchema.from_orm(item_obj)
 
     @classmethod
-    async def delete_items(cls, list_id: int) -> None:
+    async def delete_items(cls, list_id: int):
         return await Item.filter(list_id=list_id).delete()
 
     @classmethod
-    async def check_item_exists(cls, item_id: int) -> bool:
+    async def check_item_exists(cls, list_id: int, item_id: int) -> bool:
         '''
-        Checks if a given item existts
+        Checks if a given item exists
         '''
-        return await Item.filter(id=item_id).exists()
+        return await Item.filter(id=item_id, list_id=list_id).exists()
+
+    @classmethod
+    async def edit_item(cls, list_id: int, item_id: int, item: ItemInput):
+        await Item.filter(id=item_id, list_id=list_id).update(**item.to_orm())

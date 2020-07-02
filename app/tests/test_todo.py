@@ -132,38 +132,37 @@ def test_add_to_list(
 
     async def check_item_exists():
         return await ItemRepository.check_item_exists(
+            created_list.list_id,
             item_response['todo_item_id']
         )
     assert event_loop.run_until_complete(check_item_exists())
 
 
-# def test_edit_item_list(
-#     client: TestClient, event_loop: asyncio.AbstractEventLoop  # noqa: F811
-# ):
-#     '''
-#     Testing editing a item of a list
-#     '''
-# 
-#     # invalid list
-#     url = get_url("/list/0")
-#     item = ItemInput(todo_item_name="Item A")
-#     response = client.post(url, json=item.dict())
-#     assert response.status_code == status.HTTP_404_NOT_FOUND
-# 
-#     # empty list
-#     async def create_empty_list():
-#         list_input = ListInput(list_name="List A")
-#         return await ListRepository.create(list_input)
-#     created_list = event_loop.run_until_complete(create_empty_list())
-#     url = get_url(f"/list/{created_list.list_id}")
-#     response = client.post(url, json=item.dict())
-#     assert response.status_code == status.HTTP_200_OK
-#     item_response = response.json()
-#     assert item_response['todo_item_name']
-#     assert item_response['todo_item_id']
-# 
-#     async def check_item_exists():
-#         return await ItemRepository.check_item_exists(
-#             item_response['todo_item_id']
-#         )
-#     assert event_loop.run_until_complete(check_item_exists())
+def test_edit_item_list(
+    client: TestClient, event_loop: asyncio.AbstractEventLoop  # noqa: F811
+):
+    '''
+    Testing editing a item of a list
+    '''
+
+    # invalid list
+    url = get_url("/list/0/0")
+    item_a = ItemInput(todo_item_name="Item A")
+    response = client.put(url, json=item_a.dict())
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    # list with item
+    async def create_list_with_item():
+        list_input = ListInput(list_name="List A")
+        item_b = ItemInput(todo_item_name="Item B")
+        created_list = await ListRepository.create(list_input)
+        created_item = await ItemRepository.add_item(
+            created_list.list_id, item_b
+        )
+        return created_list, created_item
+    created_list, created_item = event_loop.run_until_complete(
+        create_list_with_item()
+    )
+    url = get_url(f"/list/{created_list.list_id}/{created_item.todo_item_id}")
+    response = client.put(url, json=item_a.dict())
+    assert response.status_code == status.HTTP_204_NO_CONTENT
