@@ -4,8 +4,12 @@ description = "File support for asyncio."
 name = "aiofiles"
 optional = false
 python-versions = "*"
-version = "0.5.0"
+version = "0.6.0.dev0"
 
+[package.source]
+reference = "72f88e50e48802fec8f988be5cc6c2d80c09a8de"
+type = "git"
+url = "https://github.com/Tinche/aiofiles/"
 [[package]]
 category = "main"
 description = "asyncio bridge to the standard sqlite3 module"
@@ -723,14 +727,11 @@ python-versions = "*"
 version = "1.12.1"
 
 [metadata]
-content-hash = "65620502170d60be2cf7809c8752fc82b8dff37fa4af31b4a5a4323f193b1f85"
+content-hash = "ae803df6acf9890a2256cb1de91b6edad89b7c78bef95f63bd0126b70d15beeb"
 python-versions = "^3.8"
 
 [metadata.files]
-aiofiles = [
-    {file = "aiofiles-0.5.0-py3-none-any.whl", hash = "sha256:377fdf7815cc611870c59cbd07b68b180841d2a2b79812d8c218be02448c2acb"},
-    {file = "aiofiles-0.5.0.tar.gz", hash = "sha256:98e6bcfd1b50f97db4980e182ddd509b7cc35909e903a8fe50d8849e02d815af"},
-]
+aiofiles = []
 aiosqlite = [
     {file = "aiosqlite-0.13.0-py3-none-any.whl", hash = "sha256:50688c40632ae249f986ab3ae2c66a45c0535b84a5d4aae0e0be572b5fed6909"},
     {file = "aiosqlite-0.13.0.tar.gz", hash = "sha256:6e92961ae9e606b43b05e29b129e346b29e400fcbd63e3c0c564d89230257645"},

@@ -16,7 +16,7 @@ def client() -> Generator:
     '''
     Generates a TestClient instance for models.user
     '''
-    initializer(["app.models.user"])
+    initializer(["app.models"])
     with TestClient(app) as test_client:
         yield test_client
     finalizer()

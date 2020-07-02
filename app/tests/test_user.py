@@ -1,29 +1,34 @@
 '''
-TODO app test cases
+TODO user test cases
 '''
 
 import asyncio
 
+from fastapi import status
 from fastapi.testclient import TestClient
 
-from app.models.user import Users
 from app.tests.fixtures import client, event_loop  # noqa: dependency injection
+from app.schemas.user import UserInput
+from app.repositories.user import UserRepository
+from app.core.config import settings
+
+
+def get_url(path: str) -> str:
+    return f"{settings.API_V1_STR}{path}"
 
 
 def test_register_user(client: TestClient, event_loop: asyncio.AbstractEventLoop): # noqa: dependency injection
     '''
     Test registering a user
     '''
-    response = client.post("/api/v1/users", json={"username": "admin"})
-    assert response.status_code == 200, response.text
-    data = response.json()
-    assert data['username'] == "admin"
-    assert "id" in data
-    user_id = data["id"]
+    url = get_url("/register")
+    user_input = UserInput(
+        email="email@email.com", first_name="F", last_name="L", password="123"
+    )
 
-    async def get_user_by_db():
-        user = await Users.get(id=user_id)
-        return user
+    response = client.post(url, json=user_input.dict())
+    assert response.status_code == status.HTTP_204_NO_CONTENT
 
-    user_obj = event_loop.run_until_complete(get_user_by_db())
-    assert user_obj.id == user_id
+    async def check_user():
+        return await UserRepository.check_user_exists(user_input.email)
+    assert event_loop.run_until_complete(check_user())
