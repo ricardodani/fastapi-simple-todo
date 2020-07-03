@@ -4,6 +4,23 @@
 
 Ricardo Lapa Dani @ricardodani
 
+## Requirements
+
+* Python 3.6+
+* Poetry
+
+## Installation
+
+  poetry install --dev
+ 
+## Testing
+
+  pytest app/
+  
+## Running
+
+  uvicorn app.main:app --reload
+
 ## Introduction
 
 This project was developed for learning purposes only.
