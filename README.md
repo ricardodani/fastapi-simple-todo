@@ -30,10 +30,10 @@ Also it's perfomance is proven by various benchmarks. By allowing async programm
 As mentioned, this project was constructed used a very famous code pattern: Clean Architecture.
 In this aproach, the responsabilities of each layer are very strict of its particular objectives:
 
-    - Endpoints -> API Views that receives parameters, checks it's input validity, authentication, and delegates it to a UseCase classes, that will work with business logic
-    - UseCases -> Receives validated data from the endpoint views and perform the business logic, doing calculations and acessing resources, then, returning it to the view
-    - Repositories -> It's a form of resource that communicates with the database, in this project, here we use the TortoiseORM to make operations
-    - Schemas -> Data classes that are smart enough to make validations and serializations across all of the layers
+* Endpoints -> API Views that receives parameters, checks it's input validity, authentication, and delegates it to a UseCase classes, that will work with business logic
+* UseCases -> Receives validated data from the endpoint views and perform the business logic, doing calculations and acessing resources, then, returning it to the view
+* Repositories -> It's a form of resource that communicates with the database, in this project, here we use the TortoiseORM to make operations
+* Schemas -> Data classes that are smart enough to make validations and serializations across all of the layers
 
 Respecting this architecture gives the code base a very transparent and consise logic. Without hidden stuff.
 
