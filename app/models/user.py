@@ -12,7 +12,7 @@ class User(models.Model):
     '''
 
     id = fields.IntField(pk=True)
-    email = fields.CharField(max_length=100, null=False)
+    email = fields.CharField(max_length=100, null=False, unique=True)
     first_name = fields.CharField(max_length=50, null=False)
     last_name = fields.CharField(max_length=100, null=False)
     password_hash = fields.CharField(max_length=128, null=True)
