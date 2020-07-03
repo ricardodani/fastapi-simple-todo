@@ -18,7 +18,7 @@ class ListRepository:
     @classmethod
     async def check_list_exists(cls, list_id: int) -> bool:
         '''
-        Checks if a given list existts
+        Checks if a given list exists
         '''
         return await List.filter(id=list_id).exists()
 
