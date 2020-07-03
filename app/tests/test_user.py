@@ -49,7 +49,6 @@ def test_read_current_user(
     user_input = UserInput(
         email="email2@email.com", first_name="F", last_name="L", password="123"
     )
-
     async def add_user():
         return await UserUseCase.register_user(user_input)
     event_loop.run_until_complete(add_user())

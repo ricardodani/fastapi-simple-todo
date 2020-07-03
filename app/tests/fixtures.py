@@ -28,3 +28,4 @@ def event_loop(client: TestClient) -> Generator:
     Generates a event loop to run async methods
     '''
     yield client.task.get_loop()
+

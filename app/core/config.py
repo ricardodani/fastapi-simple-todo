@@ -15,7 +15,10 @@ class Settings(BaseSettings):
     '''
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = PROJECT_NAME
+    DEBUG: bool = True
 
 
 settings = Settings()
-tortoise_settings = TortoiseSettings.generate()
+tortoise_settings = TortoiseSettings.generate(
+    test_db=settings.DEBUG
+)

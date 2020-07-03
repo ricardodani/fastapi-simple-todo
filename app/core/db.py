@@ -5,7 +5,6 @@ Config of Tortoise ORM
 from pydantic import Field, BaseSettings
 
 
-IS_TEST = False
 DB_MODELS = ["app.models"]
 POSTGRES_DB_URL = "postgres://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}" # noqa
 SQLITE_DB_URL = "sqlite://:memory:"
@@ -33,10 +32,10 @@ class TortoiseSettings(BaseSettings):
     generate_schemas: bool
 
     @classmethod
-    def generate(cls):
+    def generate(cls, test_db: bool = True):
         '''Generate Tortoise-ORM settings (with sqlite if tests)'''
 
-        if IS_TEST:
+        if test_db:
             db_url = SQLITE_DB_URL
         else:
             postgres = PostgresSettings()
