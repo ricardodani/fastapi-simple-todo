@@ -4,23 +4,6 @@
 
 Ricardo Lapa Dani @ricardodani
 
-## Requirements
-
-* Python 3.6+
-* Poetry
-
-## Installation
-
-  poetry install --dev
- 
-## Testing
-
-  pytest app/
-  
-## Running
-
-  uvicorn app.main:app --reload
-
 ## Introduction
 
 This project was developed for learning purposes only.
@@ -28,6 +11,22 @@ It's a full complete TODO List API with documentation, based on Python 3.6+ type
 FastAPI framework, TortoiseORM and a Relational database (SQLite or PostgreSQL for production).
 This project adopts the Clean Architecture priciples, I also tried to apply all good software engineering related to Python good practices and clen code.
 
+## Requirements
+
+* Python 3.6+
+* Poetry
+
+## Installation
+
+  ```poetry install --dev```
+ 
+## Testing
+
+  ```pytest app/```
+  
+## Running
+
+  ```uvicorn app.main:app --reload```
 
 ## Technologies used
 
