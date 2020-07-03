@@ -42,7 +42,9 @@ def get_user_token(
     )
 
 
-def test_create_list(client: TestClient, event_loop: asyncio.AbstractEventLoop):  # noqa: F811
+def test_create_list(
+    client: TestClient, event_loop: asyncio.AbstractEventLoop  # noqa: F811
+):
     '''
     Test creating a TODO list endpoint
     '''
