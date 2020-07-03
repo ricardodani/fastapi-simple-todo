@@ -5,7 +5,7 @@ Config of Tortoise ORM
 from pydantic import Field, BaseSettings
 
 
-IS_TEST = True
+IS_TEST = False
 DB_MODELS = ["app.models"]
 POSTGRES_DB_URL = "postgres://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}" # noqa
 SQLITE_DB_URL = "sqlite://:memory:"
@@ -18,9 +18,9 @@ class PostgresSettings(BaseSettings):
 
     postgres_user: str = Field("postgres", env="POSTGRES_USER")
     postgres_password: str = Field("postgres", env="POSTGRES_PASSWORD")
-    postgres_db: str = Field("mydb", env="POSTGRES_DB")
+    postgres_db: str = Field("todolist", env="POSTGRES_DB")
     postgres_port: str = Field("5432", env="POSTGRES_PORT")
-    postgres_host: str = Field("postgres", env="POSTGRES_HOST")
+    postgres_host: str = Field("localhost", env="POSTGRES_HOST")
 
 
 class TortoiseSettings(BaseSettings):
