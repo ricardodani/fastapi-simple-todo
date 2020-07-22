@@ -9,7 +9,7 @@ Ricardo Lapa Dani @ricardodani
 This project was developed for learning purposes only.
 It's a full complete TODO List API with documentation, based on Python 3.6+ type hinting system,
 FastAPI framework, TortoiseORM and a Relational database (SQLite or PostgreSQL for production).
-This project adopts the Clean Architecture priciples, I also tried to apply all good software engineering related to Python good practices and clen code.
+This project adopts the Clean Architecture principles, I also tried to apply all good software engineering related to Python good practices and clean code.
 
 ## Requirements
 
